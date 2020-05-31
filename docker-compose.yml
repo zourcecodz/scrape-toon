@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  cli:
+    image: node:14.3.0
+    container_name: cli
+    volumes:
+      - ./src:/var/www/html
+      - downloaded:/downloaded/
+    networks:
+      - frontend
+    ports:
+      - "6666:3000"
+    restart: always
+    working_dir: /var/www/html
+    command: "yarn test-and-dev"
+volumes:
+  downloaded:
+    driver: local
+networks:
+  frontend:
